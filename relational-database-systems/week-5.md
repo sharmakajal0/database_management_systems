@@ -145,3 +145,45 @@ obtains all the rows of Sailors including those joins with reserves by sid plus 
 SQL was an important factor in the earlier Systems of the relational model, more natural than the early procedural query languages.
 Besides, SQL allows the specification of rich integrity constraint.
 User needs to be aware of how query settle demise and evaluating it for these results.
+
+<strong>examples:</strong>
+- Find Sailors who have reserved at least one boat.
+ SELECT S.name, R.sid FROM Sailors S, Reserves R WHERE S.sid = R.sid;
+ 
+- Obtain the name of the sailors that have reserved the boat 103 with original data.
+ SELECT S.name FROM Sailors S, Reserves R WHERE S.sid=R.sid AND R.bid = 103;
+ 
+- Find the names of the sailors who have reserved a red boat, and list in the order of age.
+ SELECT S.name, S.age FROM Sailors S, Boats B, Reserves R WHERE S.sid=R.sid AND R.bid=B.bid AND B.color = 'red' ORDER BY S.age;
+
+- Find the rating of Sailors who names begin and end with B and contain at least three letters.
+ SELECT name, age, rating + 1 AS sth FROM Sailors S WHERE S.name LIKE 'B_%B';
+ 
+- Find the sid's of Sailors who've reserved a red or a green boat.
+with union:
+SELECT R.sid
+FROM Boats B, Reserves R WHERE R.bid = B.bid
+AND B.color = 'red'
+UNION
+SELECT R2.sid
+FROM Reserves R2, Boats B2
+WHERE R2.bid=B2.bid
+AND B2.color='green';
+
+with or:
+SELECT S.sid FROM Sailors S, Boats B, Reserves R WHERE S.sid = R.sid AND R.bid = B.bid AND (B.color = 'red' OR B.color = 'green');
+
+with OR and Distinct:
+SELECT DISTINCT S.sid FROM Sailors S, Boats B, Reserves R WHERE S.sid = R.sid AND R.bid = B.bid AND (B.color = 'red' OR B.color = 'green');
+
+- Find names of Sailors who have reserved boat = 103 with NESTED QUERY.
+ SELECT S.name FROM Sailors S WHERE S.sid IN ( SELECT R.sid FROM Reserves R WHERE R.bid = 103);
+
+- Find names of sailors who have reserved boat = 103 with CORRELATED QUERY.
+ SELECT S.name FROM Sailors S WHERE EXISTS (SELECT * FROM Reserves R WHERE R.sid = S.sid AND R.bid = 103);
+ * EXISTS is another set completion operator, if unique is used and a study is replaced by r, that'd find sailors with at most one reservation for boat 103.
+ 
+- Find sailors whose rating is greater than that of some sailor called Horatio.
+ SELECT * FROM Sailors S WHERE S.rating > ANY ( SELECT S2.rating FROM Sailors S2 WHERE S2.name = 'Horatio');
+ 
+- Find sailors who've reserved all boats with not exist.
