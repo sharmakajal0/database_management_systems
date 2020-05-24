@@ -185,5 +185,65 @@ SELECT DISTINCT S.sid FROM Sailors S, Boats B, Reserves R WHERE S.sid = R.sid AN
  
 - Find sailors whose rating is greater than that of some sailor called Horatio.
  SELECT * FROM Sailors S WHERE S.rating > ANY ( SELECT S2.rating FROM Sailors S2 WHERE S2.name = 'Horatio');
+
+- Find sailors who've reserved all boats with NOT EXIST.
+ SELECT S.name FROM Sailors S WHERE NOT EXISTS(
+ 	SELECT B.bid FROM Boats B WHERE NOT EXISTS(
+ 		SELECT R.bid FROM Reserves R WHERE R.bid = B.bid AND R.sid = S.sid));
  
-- Find sailors who've reserved all boats with not exist.
+- Find sailors who've reserved all boats with NOT EXIST AND NOT IN.
+ SELECT S.name FROM Sailors S WHERE NOT EXISTS(
+    SELECT B.bid FROM Boats B WHERE B.bid NOT IN(
+        SELECT R.bid FROM Reserves R WHERE R.sid = S.sid));
+
+- Count the number of Sailors.
+ SELECT COUNT(*) FROM Sailors;
+ 
+- Calculate the average age of Sailors who have rating 10.
+ SELECT AVG(S.age) FROM Sailors S WHERE S.rating = 10;
+ 
+- Find the name of the Sailors with max rating.
+ SELECT S.name FROM Sailors S WHERE( SELECT MAX(S2.rating) FROM Sailors S2);
+ 
+- Count the number of different ratings.
+ SELECT COUNT(DISTINCT rating) FROM Sailors;
+
+- Find the average age of sailors for each rating level.
+ SELECT S.rating, AVG(S.age) as avg_age FROM Sailors S GROUP BY S.rating;
+
+- Find the average age of sailors for each rating level that has at least two sailors.
+ SELECT S.rating, AVG(S.age) AS avg_age
+ FROM Sailors S GROUP BY S.rating
+ HAVING COUNT(*) > 1;
+ 
+- with WHERE: Find all sailors are at least 40 years old, then they grouped by rating.
+ SELECT S.name, S.rating, S.age as avg_age FROM Sailors S WHERE S.age >= 40 GROUP BY S.rating;
+
+- with HAVING: Find all sailors grouped by rating Then they are at least 40 years old.
+ SELECT S.name, S.rating, AVG(S.age) as avg_age FROM Sailors S GROUP BY S.rating HAVING AVG(S.age) >= 40;
+
+- sample of aggregated functions with null.
+DELETE FROM Sailors WHERE sid = 99;
+INSERT INTO Sailors VALUES (99, 'Dan', null, 48.0);
+SELECT * FROM Sailors;
+
+- number of all rows.
+
+
+- number of ratings with values.
+
+
+- count of ages.
+
+
+- outer join, left outer join
+
+
+- right outer join.
+
+
+- full outer join emulation FULL OUTER JOIN SENTENCE IS NOT SUPPORTED ON MYSQL, BUT CAN BE EMULATED.
+
+
+- Triggers.
+ 
