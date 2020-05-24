@@ -228,22 +228,37 @@ INSERT INTO Sailors VALUES (99, 'Dan', null, 48.0);
 SELECT * FROM Sailors;
 
 - number of all rows.
-
+ SELECT COUNT(*) FROM Sailors;
 
 - number of ratings with values.
-
+SELECT COUNT(RATING) FROM Sailors;
 
 - count of ages.
-
+SELECT COUNT(AGE) FROM Sailors;
 
 - outer join, left outer join
-
+SELECT Sailors.sid, Sailors.name, Reserves.bid
+FROM Sailors LEFT OUTER JOIN Reserves
+ON Reserves.sid = Sailors.sid
+ORDER BY Sailors.sid;
 
 - right outer join.
-
+SELECT S.sid, S.name, R.bid FROM Sailors S RIGHT OUTER JOIN Reserves R ON R.sid=S.sid ORDER BY S.sid;
 
 - full outer join emulation FULL OUTER JOIN SENTENCE IS NOT SUPPORTED ON MYSQL, BUT CAN BE EMULATED.
-
+SELECT S.sid, S.name, R.bid FROM Sailors S LEFT OUTER JOIN Reserves R ON R.sid = S.sid UNION ALL SELECT S2.sid, S2.name, R2.bid FROM Sailors S2 RIGHT OUTER JOIN Reserves R2  ON R2.sid = S2.sid;
 
 - Triggers.
- 
+drop table ReportYoungSailors;
+CREATE TABLE ReportYoungSailors (sid INTEGER PRIMARY KEY, name VARCHAR(32) NOT NULL, rating INTEGER, age INTEGER);
+DROP TRIGGER youngSailorUpdate;
+
+CREATE TRIGGER youngSailorUpdate
+AFTER INSERT ON Sailors
+FOR EACH ROW
+INSERT INTO ReportYoungSailors(`sid`, `name`, `age`, `rating`)
+SELECT sid, name, age, rating
+FROM Sailors
+WHERE age <= 18;
+
+INSERT INTO Sailors VALUES(27, 'Alfred', 17, 9);
