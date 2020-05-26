@@ -123,3 +123,38 @@ DELIMITER $$
 		SELECT TipoTarjeta(creditlim)
 		INTO p_customerlevel;
 	END
+
+One store procedure that we might use to check the format of the IDD's identifier is as follows:
+How to execute the store procedure is 
+
+USE `MusicalSystem`;
+DROP procedure IF EXISTS `MusicalSystem`.`QUERIES`;
+DELIMITER $$ 
+USE `MusicalSystem` $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `QUERIES`()
+begin
+select D.TITLE_DISC, PROD_YEAR, TITLE_MUSIC_PIECE, NO_TRACK
+FROM COMPACT_DISC D, RECORDED_DISC DG, MUSIC_PIECE PM
+WHERE	D.ID_DISC='X01'
+AND		D.ID_DISC=DG.ID_DISCO
+AND		DG.NO_MUSIC_PIECE = PM.NO_MUSICA_PIECE
+ORDER BY NO_TRACK
+END$$
+DELIMITER;
+
+- To drop the stored procedure:
+	DROP {PROCEDURE | FUNCTION}
+	[IF EXISTS] sp_name
+
+- Granting procedure execution to a user:
+	GRANT EXECUTE ON PROCEDURE mydb.myproc TO 'someuser'@'somehost';
+	
+## Cursor
+- SQl is a set-oriented language. It processes sets of rows in order to have a good performance.
+- A cursor access row by row from table, then it performs a sequential processing, and this type of processing degrades performance. However, the cursors are used in situations such as task that cannot be done with SQL processing, and where the cursors are more efficient and more flexible.
+
+<strong>Steps to use cursors</strong>
+Declare -> Open -> Fetch -> Empty -> (if yes) -> close
+									 (if no) -> Back to Fetch
+
+In order to use a cursor, you need to declare it, open it, fetch any specific row, and after being analyzed in each row, you free memory by closing it.
