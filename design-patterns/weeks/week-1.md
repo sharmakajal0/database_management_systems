@@ -304,6 +304,8 @@ public class Program{
 }
 ```
 
+- The adaptee is hidden from the client by the wrapper adapter class.
+
 An adapter is meant to:
 - Wrap the adaptee and expose a target interface to the client.
 - Indirectly change the adaptee's interface into one that the client is expecting by implementing a target interface.
@@ -315,3 +317,49 @@ An adapter is an effective solution. In summary, an adapter is meant to:
 - Indirect change the adaptee's interface into one that the client is expecting by implementing a target interface.
 - Indirectly translate the client's request into one that the adaptee is expecting.
 - Reuse an existing adaptee with an incompatible interface.
+
+
+# Composite Pattern
+
+Two Goals:
+- To compose nested structure objects.
+- To deal with the classes for these objects uniformly.
+
+A component interface serves as the supertype for the set of classes so that they can all be dealt with uniformly. Done by enforcing polymorphism.
+An abstract superclass can also be used in placed of an interface as both are allowed for polymorphism.
+
+A composite object can contain other composite object, since the composite class is a subtype of component. This is known as recursive composition. This term is also a synonym for composite design patterns.
+
+Issues:
+- How do we use individual types of objects to build a tree like structure?
+- How can we treat the individual types of objects uniformly without checking their types?
+
+To summarize:
+Composite design pattern is used to solve the issues of how to build a tree-like structure of objects, and how to treat the individual types of these objects uniformly. Enforcing polymorphism across each class through implementing an interface (or inheriting from super class). Using a technique called recursive composition which allows objects to be composed of other objects that are of a common type.
+
+# Proxy Pattern
+
+The proxy class wraps the real subject class i.e., hides the reference to an instance of the real subject class.
+
+Why proxy class?
+- To act as a virtual proxy.
+- To act as a protection proxy.
+- To act as a remote proxy.
+
+Main features of Proxy Pattern:
+- To use the proxy class to wrap the real subject class.
+- To have a polymorphic design so that the client class can expect the same interface for the proxy and real subject classes.
+- To use a lightweight proxy in place of a resource intensive object until it is actually needed.
+- To implement some form of intelligent verification of requests from client code in order to determine if, how, and to whom the request should be forwarded to.
+- To present a local representation of a system that is not in the same physical or virtual space.
+
+# Decorator Pattern
+
+Decorator is an abstract class. Just like the concrete component class, it implements the component interface. The main differences are that decorator aggregates other types of components, which will allow us to "stack" components on top of each other, and decorator serves as the abstract superclass of concrete decorator classes that will provide an increment of behaviour.
+
+The key concepts of this design pattern are:
+- we can add, in effect, any number of behaviour dynamically to an object at runtime by using aggregation as a substitute for pure inheritance.
+- Polymorphism is achieved by implementing a single interface.
+- Aggregation lets us create a stack of objects.
+- Each decorator object in the stack is aggregated in one-to-one relationship with the object below it in the stack.
+- By combining aggregation and polymorphism, we can recursively invoke the same behaviour down the stack and have the behaviour execute upwards from the concrete component object.
