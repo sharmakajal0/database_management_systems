@@ -76,4 +76,79 @@ The intent of this pattern is to avoid coupling the sender to the receiver by gi
 # State Pattern
 
 <b>When should you use the State Pattern?</b>
-The state Pattern
+The state Pattern is primarily used when you need to change the behaviour of an object based upon the state that it's in at run-time.
+
+UML diagram 
+
+<interface>state
+	+insertDollar()
+	+ejectMoney()
+	+dispense()
+
+	<strong>State Classes</strong>
+
+	<IdleState>
+		+insertDollar()
+		+ejectMoney()
+		+dispense()
+
+	<HasOneDollarState>
+		+insertDollar()
+		+ejectMoney()
+		+dispense()
+
+	<OutOfStock>
+		+insertDollar()
+		+ejectMoney()
+		+dispense()
+
+# Command Pattern
+
+The Command Pattern encapsulates the request as an object of its own. Usually, when one object makes a request for a second object to do an action, the first object will call a method of the second object and the second object would complete the task.
+
+A sender object creates a command object. The command pattern has another object that invokes the command objects to complete whatever task it is supposed to do, called the invoker.
+
+A command manager can also be used which basically keeps track of the commands, manipulates them and invokes them.
+
+Purposes for using the command pattern: 
+- Store and schedule different requests. When an object calls a method of another object, you can't really do anything to the method calls. Turning the different requests in your software into command objects can allow you to treat them as the way you would treat other objects.
+	- You can store these command objects into lists
+	- You can manipulate them before they are completed
+	- You can put them onto a queue
+-It decouples the objects of software program
+
+<strong>Invoker</strong>
+<b>Command</b>
+	+execute()
+	+unexecute()
+	+isReversible():boolean
+
+<b>Receiver</b>
+	+action()
+
+<b>Concrete Command</b>
+	+execute()
+	+unexecute()
+	+isReversible():boolean
+
+# Observer Pattern
+
+We'll have a subject superclass, that defines three methods:
+- Allow a new observer to subscribe.
+- Allow a current observer to unsubscribe.
+- Notify all observers about a new blog post.
+
+UML Diagram:
+Subject
++ registerObserver(Observer): void
++ unregisterObserver(Observer): void
++ notify(): void
+
+Interface: Observer
++ update(): void
+
+Blog
++ getState(): String
+
+Subscriber
++ update(): void
