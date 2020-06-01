@@ -85,22 +85,22 @@ interface: state
 	+ejectMoney()
 	+dispense()
 
-	<strong>State Classes</strong>
+<strong>State Classes</strong>
 
-	<IdleState>
-		+insertDollar()
-		+ejectMoney()
-		+dispense()
+<b>IdleState</b>
+	+insertDollar()
+	+ejectMoney()
+	+dispense()
 
-	<HasOneDollarState>
-		+insertDollar()
-		+ejectMoney()
-		+dispense()
+<b>HasOneDollarState</b>
+	+insertDollar()
+	+ejectMoney()
+	+dispense()
 
-	<OutOfStock>
-		+insertDollar()
-		+ejectMoney()
-		+dispense()
+<b>OutOfStock</b>
+	+insertDollar()
+	+ejectMoney()
+	+dispense()
 
 # Command Pattern
 
