@@ -11,23 +11,23 @@ We have PastaDish Superclass:
 - boidWater(): void // Common steps
 - cookPasta(): void // Common steps
 - drainAndPlate(): void // Common steps
-= addPasta(): void
-= addSauce(): void // abstract method of pastadish, it will be up to pastadish to provide the addSauce method body to add the right Sauce
-= addProtein(): void
-= addGarnish(): void
+	+ addPasta(): void
+	+ addSauce(): void // abstract method of pastadish, it will be up to pastadish to provide the addSauce method body to add the right Sauce
+	+ addProtein(): void
+	+ addGarnish(): void
 
 <strong>Subclasses of PastaDish class:</strong>
 1. <b>SpaghettiMeatballs</b>
-= addPasta(): void
-= addSauce(): void
-= addProtein(): void
-= addGarnish(): void
+	+ addPasta(): void
+	+ addSauce(): void
+	+ addProtein(): void
+	+ addGarnish(): void
 
 2. <b>PennyAlfredo</b>
-= addPasta(): void
-= addSauce(): void
-= addProtein(): void
-= addGarnish(): void
+	+ addPasta(): void
+	+ addSauce(): void
+	+ addProtein(): void
+	+ addGarnish(): void
 
 The template method is helpful if you have two classes with similar functionality. When you notice two classes with a very similar order of operations, you can choose to use a template method.
 
