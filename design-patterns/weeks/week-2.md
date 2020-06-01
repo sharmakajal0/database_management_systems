@@ -80,7 +80,7 @@ The state Pattern is primarily used when you need to change the behaviour of an 
 
 UML diagram 
 
-<interface>state
+interface: state
 	+insertDollar()
 	+ejectMoney()
 	+dispense()
